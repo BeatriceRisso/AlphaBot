@@ -1,41 +1,33 @@
-import socket
-import keyboard  # libreria per leggere i tasti in tempo reale (installala con: pip install keyboard)
-#RIFARE CON PYNPUT
-# IP del Raspberry Pi e porta
-SERVER_ADDRESS = ('192.168.1.128', 5001)
-BUFFER = 4096
+import socket  # Importa la libreria per la comunicazione via rete
+
+# Indirizzo IP e porta del server (il Raspberry Pi con l’AlphaBot)
+SERVER_ADDRESS = ('192.168.1.128', 5001)  
+BUFFER = 4096  # Dimensione massima dei dati ricevuti
+
+# Crea un socket IPv4 (AF_INET) e TCP (SOCK_STREAM)
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Connessione al server
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print(f"Connessione al server {SERVER_ADDRESS}...")
 s.connect(SERVER_ADDRESS)
-print("Connesso! Usa i tasti WASD per muovere il robot, X per fermarlo, Q per uscire.\n")
+print("Connesso! Puoi ora inviare comandi al robot.\n")
 
-# Ciclo per leggere i tasti
+# Ciclo principale per inviare comandi al server
 while True:
-    if keyboard.is_pressed("w"):
-        s.send("w".encode())
-    elif keyboard.is_pressed("s"):
-        s.send("s".encode())
-    elif keyboard.is_pressed("a"):
-        s.send("a".encode())
-    elif keyboard.is_pressed("d"):
-        s.send("d".encode())
-    elif keyboard.is_pressed("x"):
-        s.send("x".encode())
-    elif keyboard.is_pressed("q"):  # per uscire
-        print("Chiusura connessione...")
+    # Legge un comando dall'utente
+    message = input("Scrivi un comando (avanti, indietro, sinistra, destra, stop, esci): ")
+
+    # Se l’utente scrive “esci”, chiude la connessione
+    if message.lower() == "esci":
+        print("Disconnessione dal server...")
         break
 
-    # Riceve eventuale risposta dal server (non obbligatoria)
-    s.setblocking(False)
-    try:
-        data = s.recv(BUFFER)
-        if data:
-            print("Server:", data.decode())
-    except:
-        pass
-    s.setblocking(True)
+    # Invia il messaggio al server
+    s.send(message.encode())
+
+    # Riceve la risposta dal server e la mostra
+    data = s.recv(BUFFER)
+    print("Risposta del server:", data.decode())
 
 # Chiude il socket
 s.close()
