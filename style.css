@@ -1,0 +1,70 @@
+/* titolo */
+h1 {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 2rem;
+    color: #1a202c;
+}
+
+/* pannello */
+.panel {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 26px;
+    display: flex;
+    justify-content: space-around; /* distribuisce meglio */
+    align-items: center;
+    gap: 40px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* contenitori */
+.container {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+
+    min-width: 280px;
+    flex: 1; /* si adatta allo spazio */
+}
+
+/* pulsanti */
+button {
+    height: 50px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #e2e8f0, #cbd5e0);
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+button:hover {
+    background: linear-gradient(135deg, #a0aec0, #718096);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* STOP centrale */
+.panel > div:nth-child(2) button {
+    background: #f56565;
+    color: #fff;
+    font-size: 1.1rem;
+    padding: 0 20px;
+    box-shadow: 0 6px 12px rgba(245, 101, 101, 0.4);
+}
+
+.panel > div:nth-child(2) button:hover {
+    background: #c53030;
+}
+
+header {
+    background: #f3fcff;
+}
