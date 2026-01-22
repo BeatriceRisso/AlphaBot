@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Controllo Snoopy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Controllo Robot</h2>
+
+    <div class="controls">
+        <button onclick="send('s')">Avanti</button>
+        <button onclick="send('a')">Sinistra</button>
+        <button onclick="send('x')">Stop</button>
+        <button onclick="send('d')">Destra</button>
+        <button onclick="send('w')">Indietro</button>
+    </div>
+
+    <div class="links">
+        <a href="/login">Login</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <script>
+        function send(cmd) {
+            fetch("/move/" + cmd);
+        }
+    </script>
+</body>
+</html>
